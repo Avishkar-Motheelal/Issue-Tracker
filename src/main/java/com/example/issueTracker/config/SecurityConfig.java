@@ -21,15 +21,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
-            .authorizeRequests().antMatchers("/register**")
-            .permitAll().anyRequest().authenticated()
+            .authorizeRequests()
+            .antMatchers("/css/**").permitAll()
+            .antMatchers("/js/**").permitAll()
+            .antMatchers("/register**").permitAll()
+            .anyRequest().authenticated()
             .and()
-//            .formLogin().loginPage("/login")
-//            .permitAll()
-//            .and()
             .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .defaultSuccessUrl("/register")
+            .failureUrl("/login?error")
             .and()
             .logout().invalidateHttpSession(true)
-            .clearAuthentication(true).permitAll();
+            .clearAuthentication(true).permitAll()
+            .logoutUrl("/logout");
     }
 }

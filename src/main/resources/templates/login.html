@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>Issue Tracker - Sign in</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="post" action="/login">
+    <h3>Log in Here</h3>
+    <div th:if="${param.error}" class="error">Invalid credentials</div>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="User" id="username" name="username" required autofocus>
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password" required>
+
+    <button>Log In</button>
+    <div>
+        <a class="alt-form" href="/register">Register here</a>
+    </div>
+</form>
+</body>
+</html>
