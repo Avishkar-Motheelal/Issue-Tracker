@@ -1,5 +1,7 @@
 package com.example.issueTracker.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
+@Data
 public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -16,38 +20,14 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean enabled;
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards;
 
 
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-    }
-
-
-    public User() {
-    }
-
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 
