@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board getBoardByUser(User user) {
-        return boardRepository.findByUser(user.getUsername()).orElseThrow(EntityNotFoundException::new);
+        return boardRepository.findByUser(user).orElseThrow(EntityNotFoundException::new);
     }
 
 
