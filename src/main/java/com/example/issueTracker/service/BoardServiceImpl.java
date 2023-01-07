@@ -6,7 +6,7 @@ import com.example.issueTracker.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +15,8 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public Board getBoardByUser(User user) {
-        return boardRepository.findByUser(user).orElseThrow(EntityNotFoundException::new);
+    public List<Board> getBoardsByUser(User user) {
+        return boardRepository.findAllByUser(user);
     }
 
 

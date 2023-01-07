@@ -3,9 +3,11 @@ package com.example.issueTracker.service;
 import com.example.issueTracker.model.Board;
 import com.example.issueTracker.model.User;
 
+import java.util.List;
+
 public interface BoardService {
 
-    public Board getBoardByUser(User user);
+    List<Board> getBoardsByUser(User user);
 
-    public void createBoard(Board board);
+    void createBoard(Board board);
 }
