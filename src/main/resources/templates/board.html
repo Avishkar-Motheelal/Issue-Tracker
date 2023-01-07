@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout.html}">
+<head></head>
+<body>
+<div layout:fragment="contents">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="issue : ${board.getIssues()}">
+            <td><a th:href="@{issue/{id}(id=${issue.getIssueId()})}" th:text="${issue.getTitle()}"></a></td>
+            <td th:text="${issue.getDetails()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

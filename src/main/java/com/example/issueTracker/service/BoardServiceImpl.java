@@ -1,5 +1,6 @@
 package com.example.issueTracker.service;
 
+import com.example.issueTracker.exceptions.NotFoundException;
 import com.example.issueTracker.model.Board;
 import com.example.issueTracker.model.User;
 import com.example.issueTracker.repository.BoardRepository;
@@ -21,7 +22,13 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public void createBoard(Board board) {
-        boardRepository.save(board);
+    public Board createBoard(Board board) {
+        return boardRepository.save(board);
+    }
+
+
+    @Override
+    public Board getBoard(Long boardId) {
+        return boardRepository.findById(boardId).orElseThrow(() -> new NotFoundException("Board not found"));
     }
 }

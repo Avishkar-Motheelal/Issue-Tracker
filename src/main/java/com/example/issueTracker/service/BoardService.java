@@ -9,5 +9,7 @@ public interface BoardService {
 
     List<Board> getBoardsByUser(User user);
 
-    void createBoard(Board board);
+    Board createBoard(Board board);
+
+    Board getBoard(Long id);
 }
