@@ -4,6 +4,8 @@ import com.example.issueTracker.exceptions.UnauthorizedException;
 import com.example.issueTracker.model.Board;
 import com.example.issueTracker.model.User;
 import com.example.issueTracker.service.BoardService;
+import com.example.issueTracker.util.BoardUtils;
+import com.example.issueTracker.util.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class BoardController {
 
     @GetMapping(value = "/boards")
     public String getAllBoards(Principal principal, ModelMap model) {
-        User user = getUserFromPrincipal(principal);
+        User user = UserUtils.getUserFromPrincipal(principal, userService);
         List<Board> boards = boardService.getBoardsByUser(user);
         model.addAttribute("boards", boards);
         return "boards";
@@ -39,7 +41,7 @@ public class BoardController {
     @GetMapping(value = "/boards/{id}")
     public String viewBoard(@PathVariable("id") long id, Principal principal, ModelMap model) {
         Board board = boardService.getBoard(id);
-        if (!Objects.equals(board.getUser().getUsername(), principal.getName())) {
+        if (!BoardUtils.isUserBoardOwner(board, principal)) {
             throw new UnauthorizedException("You are not authorized to view this board");
         }
         model.addAttribute("board", board);
@@ -60,13 +62,8 @@ public class BoardController {
             return "create_board";
         }
 
-        board.setUser(getUserFromPrincipal(principal));
+        board.setUser(UserUtils.getUserFromPrincipal(principal, userService));
         board = boardService.createBoard(board);
         return "redirect:/boards/" + board.getId();
-    }
-
-
-    private User getUserFromPrincipal(Principal principal) {
-        return (User) userService.loadUserByUsername(principal.getName());
     }
 }

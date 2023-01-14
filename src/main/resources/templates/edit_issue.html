@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout.html}">
+<head></head>
+<body>
+<div layout:fragment="contents">
+    <h2>Update issue</h2>
+    <form action="#" th:action="@{/issue/edit}" th:method="POST" th:object="${issue}">
+        <label>Title</label>
+        <input type="text" th:field="*{title}" name="title" th:value="${issue.getTitle()}">
+        <label>Details</label>
+        <input type="textarea" th:field="*{details}" name="details" th:value="${issue.getDetails}">
+        <input type="submit" value="Update">
+    </form>
+</div>
+</body>
+</html>

@@ -24,8 +24,8 @@ public class DemoUserData {
     private final IssueService issueService;
 
 
-    @EventListener
-    public void loadDemoUser(ApplicationReadyEvent event) {
+    @EventListener(classes = {ApplicationReadyEvent.class})
+    public void loadDemoUser() {
         User user = new User();
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin"));

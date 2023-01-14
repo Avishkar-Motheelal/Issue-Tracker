@@ -8,5 +8,7 @@ import java.util.List;
 public interface IssueService {
     public List<Issue> getAllIssues(Board board);
 
-    public void createIssue(Issue issue);
+    public Issue createIssue(Issue issue);
+
+    public Issue getIssue(Long id);
 }
